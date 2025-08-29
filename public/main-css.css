@@ -1,0 +1,39 @@
+.cat-select.no-border-select .v-field--variant-outlined .v-field__outline__start,
+.cat-select.no-border-select .v-field--variant-outlined .v-field__outline__end{
+    border-width: 0 !important;
+}
+.search-onefield .v-field--variant-outlined .v-field__outline__start,
+.search-onefield .v-field--variant-outlined .v-field__outline__end{
+    border-color: #209547;
+    opacity: 1;
+}
+.cat-select.no-border-select .v-field--variant-outlined .v-field__outline{
+    box-shadow: none !important;
+}
+
+.header-main .search-onefield .v-field.v-field--appended{
+    padding-right: 0;
+}
+.header-main .search-onefield .v-field__append-inner button{
+    height: 100%;
+}
+.footer .app-logo svg,
+.footer .app-logo svg path{
+    fill: #fff !important;
+}
+.box-sponsor .swiper-button-next, .box-sponsor .swiper-button-prev{
+    width: 20px;
+    height: 20px;
+}
+@media (max-width: 959px){
+    .app-logo svg{
+        max-width: 120px;
+    }
+    .header-main .search-onefield .v-field.v-field--appended{
+        padding-left: 0;
+    }
+    .app-logo svg,
+    .app-logo svg path{
+        fill: #fff !important;
+    }
+}
