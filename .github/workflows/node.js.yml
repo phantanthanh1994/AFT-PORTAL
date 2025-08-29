@@ -32,7 +32,7 @@ jobs:
 
       - name: Install deps & Build
         run: |
-          npm ci
+          npm ci --legacy-peer-deps
           npm run build
         # Nếu bạn dùng yarn/pnpm:
         # run: corepack enable && pnpm i --frozen-lockfile && pnpm build
