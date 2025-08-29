@@ -1,0 +1,57 @@
+name: Vue3 Deploy (FTP)
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+
+      - name: Install deps & Build
+        run: |
+          npm ci
+          npm run build
+        # Nếu bạn dùng yarn/pnpm:
+        # run: corepack enable && pnpm i --frozen-lockfile && pnpm build
+
+      # Deploy chỉ thư mục dist
+      - name: Deploy dist via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server:   ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          port: 21
+
+          local-dir: ./dist/   # quan trọng: chỉ upload build output
+          server-dir: /home/vgsmebqqhosting/domains/cmsaft.vinaspar.co/  # sửa đúng thư mục web
+
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/.DS_Store
+          log-level: verbose
