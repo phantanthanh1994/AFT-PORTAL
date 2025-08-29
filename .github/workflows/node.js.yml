@@ -48,7 +48,7 @@ jobs:
           port: 21
 
           local-dir: ./dist/   # quan trọng: chỉ upload build output
-          server-dir: /home/vgsmebqqhosting/domains/cmsaft.vinaspar.co/  # sửa đúng thư mục web
+          server-dir: /public_html/  # sửa đúng thư mục web
 
           exclude: |
             **/.git*
